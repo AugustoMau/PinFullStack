@@ -1,0 +1,23 @@
+#footer{
+    background: #343434;
+    width: 1366px;
+    height: 96px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    p{
+        width: 15vw; //195px;
+        height: 5vh; //21px;
+        margin-left:  101px;
+        color: #DCE1DA;
+        font-size: small;
+    }
+}
+
+.footer_image{
+    width: 86px;
+    height: 20px;
+    margin-right: 100px;
+    justify-content: flex-end;
+}
