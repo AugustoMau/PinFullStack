@@ -1,0 +1,10 @@
+@mixin button {
+    background-color: $color-brand;
+    color: white;
+    border-radius: 25px;
+    width: 144px;
+    height: 48px;
+    margin-top: 20px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+}

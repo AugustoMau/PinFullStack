@@ -1,0 +1,26 @@
+#about {
+    display: flex;
+    flex-direction: column;
+    margin-right: 300px;
+    margin-top: 150px;
+    margin-bottom: 150px;
+    padding-left: 300px;
+    border-left: solid;
+    border-left-width: 15px;
+    border-left-color: $color-brand;
+}
+
+.about_tittle {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1;
+    font-size: xx-large;
+}
+
+.about_tittle-orange {
+    color: $color-brand;
+}
+
+.about_text {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+}

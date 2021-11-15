@@ -1,0 +1,36 @@
+@import './variables';
+@import './mixins';
+
+
+#services {
+    width: 1366px;
+    height: 768px;
+    background-color: #FFFFFF;
+}
+.imagen__services{
+    width: 770px;
+    height: 768px;
+    float: right;
+}
+.container__services{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+ .accordion{
+     width: 708px;
+     height: 259px;
+     top: 144;
+     color:#5F6368;
+ }
+ .text__acordeon{
+     font-size: 16px;
+ }
+ 
+
+ 
+ 

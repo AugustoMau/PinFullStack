@@ -1,0 +1,49 @@
+#header {
+    background-image: url("/my-app/src/assets/image/slider-1.png");
+    width: 1366px;
+    height: 750px;
+  }
+  .toplogo {
+    margin-top: 33px;
+    margin-left: 30px;
+    float: left;
+  }
+  .header__ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    opacity: 100%;
+  }
+  .header_ul__elements {
+    margin-top: 38px;
+    color: #FFFFFF;
+  }
+  .header_ul__elements a {
+    font-size: 20px;
+    margin-left: 150px;
+    text-decoration: none;
+    color:#FFFFFF ;
+  }
+  .text-primary {
+    font-size: 40px;
+    padding-top: 100px;
+    margin-left: 101px;
+    width: 600px;
+    font-family: 'Times New Roman', Times, serif;
+    color:white;
+   
+  }
+  h2 {
+    font-size: 16px;
+    margin-top: 50px;
+    margin-left: 101px;
+    margin-right: 922px;
+    color: #FFFFFF;
+  }
+  .boton {
+    @include button;
+   
+  }
+  
+  
