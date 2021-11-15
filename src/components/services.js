@@ -5,8 +5,8 @@ import { Accordion, Container } from "react-bootstrap";
 export default function Services() {
   return (
     <div id="services">
-      <div className="imagen__services">
-        <img src={imagen} alt="imagen services"></img>
+      
+        
         <div className="container__services">
       <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
@@ -47,6 +47,8 @@ export default function Services() {
           </Accordion.Item>
         </Accordion>
       </div>
+      <div className="imagen__services">
+      <img src={imagen} alt="imagen services"></img>
       </div>
       
     </div>
