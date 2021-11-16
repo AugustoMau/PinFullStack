@@ -3,27 +3,32 @@
 
 
 #services {
-    display: flex;
-    width: 1366px;
-    height: 768px;
+    width: 100vw;
+    height: 100vh;
     background-color: #FFFFFF;
+    position: relative;
+    z-index: 1;
 }
 .imagen__services{
     width: 770px;
     height: 768px;
-    float: right;
+    left: 596px;
+    position: absolute;
+    z-index: 2;
 }
 .container__services{
-  //position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
+  width:55%;
+  margin-left: 220px;
+  padding-right: 220px;
+  padding-top: 144px;
+  position: relative;
+  z-index: 3;
+  p{
+      color: #5F6368;
+  }
 }
  .accordion{
-     width: 708px;
+     width: 669px;
      height: 259px;
      top: 144;
      color:#5F6368;

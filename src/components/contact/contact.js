@@ -3,7 +3,6 @@ import { Form } from 'react-bootstrap'
 
 export default({onChangeName, onChangeEmail, onChangePhone, onChangeMessage, onClick}) => {
 
-  
     return (
     <div id="contact" className="contact">
       <div className="contact__rectangulo">
