@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "../../../src/assets/css/styles.scss";
 //import dataSliderProduct from "./dataSliderProduct";
 import Controls from "./controls";
-import Background from "../../assets/images/section3-image.png";
+import Background from "../../assets/images/section3-image1.png";
 
 export default function Product() {
-  const [slideIndex, setSlideIndex] = useState(0)
+  const [slideIndex, setSlideIndex] = useState(1)
 
     const nextSlide = () => {
         if(slideIndex === - 1){
