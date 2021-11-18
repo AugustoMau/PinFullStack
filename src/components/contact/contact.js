@@ -87,7 +87,7 @@ export default () => {
       const sendData = async () => {
         try {
           const response = await axios.post(
-            "https://augustomau-laravel.herokuapp.com/api/usuarionuevo",
+            "https://augustomau-laravel.herokuapp.com/public/api/usuarionuevo",
 
             formData
           );
