@@ -46,7 +46,7 @@ export default () => {
              const response = await axios({
                 method: 'POST',
                 formData,    
-                //url:  `http://127.0.0.1:8000/api/grabando`
+                url:  `http://127.0.0.1:8000/api/newuser`
 
              })
              console.log(response)
