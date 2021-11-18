@@ -1,82 +1,115 @@
-import { Form, FloatingLabel, Container } from "react-bootstrap";
-import "../../assets/css/styles.scss";
-import Button from "./button";
+import {useState} from 'react';
+import axios from 'axios';
+import {Form,FloatingLabel}  from 'react-bootstrap';
+import '../../assets/css/styles.scss';
 
-export default ({
-  onChangeName,
-  onChangeEmail,
-  onChangePhone,
-  onChangeMessage,
-  onClick,
-  nameValid,
-  emailValid,
-  phoneValid,
-  messageValid,
-  valor,
-}) => {
-  return (
-    <div className="my-container__h2-form">
-      <h2 class="contact-h2">
-        Get in touch<span> We are hiring!</span>
-      </h2>
-      <div className="my-form">
-        <FloatingLabel
-          controlId="floating-inp"
-          label="Name"
-          className="tt mb-4 "
-        >
-          <Form.Control
-            className={nameValid ? "borde-verde" : "borde-rojo"}
-            type="text"
-            placeholder="###"
-            name="name"
-            onChange={onChangeName}
-            autocomplete="off"
-          />
-        </FloatingLabel>
 
-        <FloatingLabel controlId="floating-inp" label="Email" className="mb-4">
-          <Form.Control
-            className={emailValid ? "borde-verde" : "borde-rojo"}
-            type="email"
-            placeholder="###"
-            name="email"
-            onChange={onChangeEmail}
-            autocomplete="off"
-          />
-        </FloatingLabel>
+export default () => {
 
-        <FloatingLabel controlId="floating-inp" label="Phone" className="mb-4">
-          <Form.Control
-            className={phoneValid ? "borde-verde" : "borde-rojo"}
-            type="phone"
-            placeholder="###"
-            name="phone"
-            onChange={onChangePhone}
-            autocomplete="off"
-          />
-        </FloatingLabel>
+    const [formData, setFormData] = useState({
+        name : "",
+        email : "",
+        phone :"",
+        message : ""
+    });
 
-        <FloatingLabel
-          controlId="floating-inp"
-          label="Message"
-          className="mb-4"
-        >
-          <Form.Control
-            className={messageValid ? "borde-verde" : "borde-rojo"}
-            as="textarea"
-            placeholder="###"
-            style={{ height: "10rem", paddingTop: "2rem" }}
-            name="message"
-            onChange={onChangeMessage}
-            autocomplete="off"
-          />
-        </FloatingLabel>
+    const handleChange = (event) => {
+        const clave  = event.target.name;
+        const valor  = event.target.value;
 
-        <Container className="container-button">
-          <Button type="submit" onClick={onClick} valor={valor} />
-        </Container>
-      </div>
-    </div>
-  );
+        setFormData({...formData,[clave]:valor});
+    }; 
+
+    const handleSubmit = ()=>{
+      console.log(formData);
+      const sendData = async () => {
+        try{
+          console.log(formData);
+          const response = await axios.post(
+            "https://augustomau-laravel.herokuapp.com/public/api/usuarionuevo",
+            //"http://127.0.0.1:8000/api/usuarionuevo",            
+            formData
+          );
+          console.log(response);
+          }catch(err){
+           console.log(err);
+          }
+        };
+
+         sendData();
+         setFormData({
+             name : "",
+             email : "",
+             phone :"",
+             message : ""
+         });
+    };
+
+    console.log(formData);
+
+    return (
+        <div>
+            <div id="contact" className="contact">
+              <div className="contact__bgsecondary">
+              </div>
+              <div className="contact__image">
+              </div>
+              <div> 
+                <h2>Get in touch <br/><b>We are hiring!</b></h2>
+              </div>
+              <div className="datos__contacto">
+                <FloatingLabel
+                  controlId="floating-inp"
+                  label="Name"
+                  lassName="tt mb-4"
+                >
+                  <Form.Control
+                   type="text"
+                   placeholder="###"
+                   name="name"
+                   onChange={handleChange}
+                   />
+                </FloatingLabel>
+                <FloatingLabel
+                    controlId="floating-inp"
+                    label="Email"
+                    className="mb-4"
+                >
+                  <Form.Control
+                    type="email"
+                    placeholder="###"
+                    name="email"
+                    onChange={handleChange}
+                    />
+                </FloatingLabel>
+                <FloatingLabel
+                   controlId="floating-inp"
+                   label="Phone"
+                   className="mb-4"
+                >
+                  <Form.Control
+                    type="phone"
+                    placeholder="###"
+                    name="phone"
+                    onChange={handleChange}
+                  />
+                </FloatingLabel>
+                <FloatingLabel
+                  controlId="floating-inp"
+                  label="Message"
+                  className="mb-4"
+                >
+                  <Form.Control
+                     as="textarea"
+                     placeholder="###"
+                     style={{ height: "10rem", paddingTop: "2rem" }}
+                     name="message"
+                     onChange={handleChange}
+                  />
+                </FloatingLabel> 
+                <button className="contact__button" onClick={handleSubmit} >Send</button>
+              </div> 
+            </div>
+        </div>        
+    );
 };

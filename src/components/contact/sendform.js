@@ -1,45 +1,77 @@
-import { Alert, Button } from "react-bootstrap";
+import {useState} from 'react';
+import axios from 'axios';
+import Contact from './contact';
 
-export default ({ onClick, status}) => {  
+export default () => {
 
-  return (    
+    const [formData, setFormData] = useState({
+        name : "",
+        email : "",
+        phone :"",
+        message : "",
+    });
 
-    <div className="my-container__h2-form">
-      {status === 0 ? 
-        <Alert className="mensaje-alert" variant="transparent">          
-          <p className="loading-msj">Loading...</p>            
-        </Alert>
-        
-       : status < 200 || status > 299 ?
-       <Alert
-          className="mensaje-alert"
-          variant="danger"
-          onClick={onClick}
-          
-        >
-          <Alert.Heading>El mensaje NO se pudo enviar</Alert.Heading>
-          <p ></p>
-         
-          <Button variant="light" className="boton-close">
-            Close
-          </Button>
-        </Alert>
-        
-        : 
-        <Alert
-          className="mensaje-alert"
-          variant="success"
-          onClick={onClick}
-          
-        >
-          <Alert.Heading>Mensaje Enviado Correctamente!</Alert.Heading>
-          <p className="parrafo-satisfactorio">Gracias Por Comunicarte Con Nosotros</p>
-          <Button variant="light" className="boton-close" >
-            Close
-          </Button>
-        </Alert>
-      }
-    </div>
-   
-  );
-};
+    /* const handleChange = (event) => {
+        const property  = event.target.name
+        const value  = event.target.value
+        setFormData({...formData,[property]:value})
+    } */
+
+    const handleChangeName = (event) => {
+        const name = event.target.value
+        setFormData({...formData, name})
+     }  
+     
+     const handleChangeEmail = (event) => {
+         const email = event.target.value
+         setFormData({...formData, email})
+      } 
+ 
+      const handleChangePhone = (event) => {
+         const phone = event.target.value
+         setFormData({...formData, phone})
+      } 
+ 
+      const handleChangeMessage = (event) => {
+         const message = event.target.value
+         setFormData({...formData, message})
+      }  
+
+      //console.log(formData)
+
+      const handleSubmit = ()=>{
+        const sendData = async () => {
+            console.log(formData)
+            try{
+             const response = await axios.post(
+                `http://127.0.0.1:8000/api/usuarionuevo`
+
+             )
+             console.log(response)
+            }catch(err){
+             console.log(err)
+            }
+        }
+         sendData()
+         setFormData({
+             name : "",
+             email : "",
+             phone :"",
+             message : ""
+         })
+    }
+
+    return (
+        <div>
+        <Contact
+        onChangeName = {handleChangeName}
+        onChangeEmail = {handleChangeEmail}
+        onChangePhone = {handleChangePhone}
+        onChangeMessage = {handleChangeMessage}
+        onClick = {handleSubmit}
+        />
+        </div>
+    )
+
+    
+}
