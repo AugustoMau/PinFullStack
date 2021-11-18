@@ -1,68 +1,139 @@
-import '../../assets/css/styles.css'
-import { Alert, Form } from 'react-bootstrap'
+import { useState } from "react";
+import axios from "axios";
+import { Container } from "react-bootstrap";
+import "../../assets/css/styles.scss";
+import MensajeForm from "./sendform";
+import FormContact from "./forms";
 
-export default({onChangeName, onChangeEmail, onChangePhone, onChangeMessage, onClick}) => {
+export default () => {
+  const [statusSend, setStatusSend] = useState(0);
+  const [activeMsj, setActiveMsj] = useState(false);
+  const [nameValid, setNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
+  const [messageValid, setMessageValid] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
-    return (
-    <div id="contact" className="contact">
-      <div className="contact__rectangulo">
-      </div>
-      <div className="contact__image">
-      </div>
-      <div> 
-      <h2>Get in touch <br/><b>We are hiring!</b></h2>
-      </div>
-      <div className="datos__contacto">
-        <Form>
-        <Form.Group>
-          <Form.Label>Nombre completo</Form.Label>
-          <Form.Control 
-          type="text" 
-          placeholder="Name" 
-          onChange={onChangeName}/>
-          <Form.Control.Feedback type="invalid">
-            Ingrese nombre
-          </Form.Control.Feedback>
-          </Form.Group>
+  const handleChangeName = (event) => {
+    const name = event.target.value;
 
-          <Form.Group>
-          <Form.Label>Direccion email</Form.Label>
-          <Form.Control 
-          type="email" 
-          placeholder="name@example.com" 
-          onChange={onChangeEmail} />
-          <Form.Control.Feedback type="invalid">
-            Ingrese un mail válido
-          </Form.Control.Feedback>
-          </Form.Group>
+    /* Validacion del campo name */
+    const regexName = RegExp(/^[a-zA-Z ]+$/);
+    const resName = regexName.test(name);
+    console.log(name.length);
 
-          <Form.Group>
-          <Form.Label>Numero de celular</Form.Label>
-          <Form.Control 
-          type="text" 
-          placeholder="Enter Number Phone" 
-          onChange={onChangePhone} />
-          <Form.Control.Feedback type="invalid">
-            Ingrese su celular
-          </Form.Control.Feedback>
-          </Form.Group>
+    resName && name.length > 0 && name.length < 16
+      ? setNameValid(true)
+      : setNameValid(false);
 
-          <Form.Group>
-          <Form.Label>Mensaje</Form.Label>
-          <Form.Control 
-          as="textarea" 
-          rows={3} 
-          onChange={onChangeMessage} />
-          <Form.Control.Feedback type="invalid">
-            Ingrese un mensaje
-          </Form.Control.Feedback>
-          </Form.Group>
+    setFormData({ ...formData, name });
+  };
+
+  const handleChangeEmail = (event) => {
+    const email = event.target.value;
+
+    /* Validacion del campo email */
+    const regexEmail = RegExp(
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+    );
+    const resEmail = regexEmail.test(email);
+
+    resEmail ? setEmailValid(true) : setEmailValid(false);
+
+    setFormData({ ...formData, email });
+  };
+
+  const handleChangePhone = (event) => {
+    const phone = event.target.value;
+
+    /* Validacion del campo phone */
+    const regexPhone = RegExp(/^[0-9]+$/);
+    const resPhone = regexPhone.test(phone);
+    console.log(resPhone);
+
+    resPhone && phone.length > 6 && phone.length < 12
+      ? setPhoneValid(true)
+      : setPhoneValid(false);
+
+    setFormData({ ...formData, phone });
+  };
+
+  const handleChangeMessage = (event) => {
+    const message = event.target.value;
+
+    /* Validacion del campo message */
+    const regexMessage = RegExp(/^[a-zA-Z0-9 ]+$/);
+    const resMessage = regexMessage.test(message);
+
+    resMessage ? setMessageValid(true) : setMessageValid(false);
+
+    setFormData({ ...formData, message });
+  };
+
+  const formToggle = () => {
+    setActiveMsj(false);
+  };
+
+  const handleSubmit = () => {
+    if (nameValid && emailValid && phoneValid && messageValid) {
+
+      setActiveMsj(true);
+
+      const sendData = async () => {
+        try {
+          const response = await axios.post(
+            "https://augustomau-laravel.herokuapp.com/api/usuarionuevo",
+
+            formData
+          );
+          setStatusSend(response.status);
+        } catch (err) {
+          setStatusSend(err.message.split(" ")[5]);
+        }
         
-        </Form> 
-      </div> 
-      <button className="contact__button" type='submit' onClick={onClick} >Send</button>
+      };
+
+      sendData();
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      setNameValid(false);
+      setEmailValid(false);
+      setPhoneValid(false);
+      setMessageValid(false);
+    }
+  };
+
+  return (
+    <div id="contact" className="contact">
+      <Container className="my-container-contact">
+        {!activeMsj ? (
+          <FormContact
+            onChangeName={handleChangeName}
+            onChangeEmail={handleChangeEmail}
+            onChangePhone={handleChangePhone}
+            onChangeMessage={handleChangeMessage}
+            onClick={handleSubmit}
+            nameValid={nameValid}
+            emailValid={emailValid}
+            phoneValid={phoneValid}
+            messageValid={messageValid}
+            valor="Send"
+          />
+        ) : (
+          <MensajeForm onClick={formToggle} status={statusSend} />
+        )}
+        <div class="contact-img"></div>
+      </Container>
     </div>
-
-
-    )
-}
+  );
+};
