@@ -43,12 +43,9 @@ export default () => {
         const sendData = async () => {
             console.log(formData)
             try{
-             const response = await axios({
-                method: 'POST',
-                formData,    
-                url:  `http://127.0.0.1:8000/api/usuarionuevo`
-
-             })
+             const response = await axios.post(
+                `http://127.0.0.1:8000/api/usuarionuevo`
+             )
              console.log(response)
             }catch(err){
              console.log(err)
