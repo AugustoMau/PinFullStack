@@ -1,6 +1,6 @@
 import { Form, FloatingLabel, Container } from "react-bootstrap";
 import "../../assets/css/styles.scss";
-import Button from "../common/Button";
+import Button from "./button";
 
 export default ({
   onChangeName,
