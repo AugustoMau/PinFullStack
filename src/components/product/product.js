@@ -96,11 +96,11 @@ export default () => {
         <h3 className="product-h3">
             INTEGRANTES
         </h3>
-        <h2 className="product-h2_2">
+        <h3 className="product-h2_2">
             AGUSTIN VALINOTI - 21 AÑOS
             AUGUSTO MAURO - 27 AÑOS
             EMANUEL AGUIRRE - 
-        </h2>
+        </h3>
         <p className="product-p">
             MUNDOS E
         </p>

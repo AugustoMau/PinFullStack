@@ -1,4 +1,4 @@
-#product {
+#product .product {
     background: linear-gradient(90deg, #F2F4F1 65%, #DCE1DA 35%);
     display: flex;
     justify-content: flex-end;
@@ -44,7 +44,9 @@
     margin: 0px;
     font-size: xx-large;
 }
-
+.product-h2_2{
+    font-size: initial;
+}
 .product-p{
     font-family: 'Roboto', sans-serif;
     padding-top: 15px;
@@ -53,6 +55,7 @@
 .product-controls {
     cursor: pointer;
     justify-content: space-between;
+    display: flex;
     margin-left: 220px;
 }
 
